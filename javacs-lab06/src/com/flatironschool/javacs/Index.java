@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.HashSet;
+import java.util.Iterator;
 
 import org.jsoup.nodes.Node;
 import org.jsoup.select.Elements;
@@ -56,6 +57,18 @@ public class Index {
 	public void indexPage(String url, Elements paragraphs) {
 		// make a TermCounter and count the terms in the paragraphs
         // TODO: fill this in
+		
+
+		TermCounter counter = new TermCounter(url.toString());
+		counter.processElements(paragraphs);
+		
+		Set<String> keys = counter.keySet();
+		Iterator<String> iter = keys.iterator();
+		
+		while (iter.hasNext())
+		{
+			add (iter.next(), counter);
+		}
 		
 		// for each term in the TermCounter, add the TermCounter to the index
         // TODO: fill this in
